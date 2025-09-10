@@ -1,5 +1,5 @@
 # Shoping 
-https://jumaqasimim.github.io/Tailwindshop/
+
 > ich möchte eine online Kleidung Shop erstellen.
 > diese seit hat 5 pages
 > 1. Home page
@@ -9,12 +9,15 @@ https://jumaqasimim.github.io/Tailwindshop/
 > 5. login page
 > 6. register page
 
+
 ## Technologs
 > 1. HTML
 > 2. Tailwind CSS
 > 3. Chart.js
 > 4. React.js
 > 5. Vite
+> 6. react-toastify
+> 7. react-icon/fa
 
 # Folders
 > 1. images
