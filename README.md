@@ -8,7 +8,6 @@
 > 4. Cart page
 > 5. login page
 > 6. register page
-> 7. 
 
 
 ## Technologs

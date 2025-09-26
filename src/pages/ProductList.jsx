@@ -1,9 +1,29 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
+
+// react icons
+import { CiStar } from "react-icons/ci";
+import { IoMdStarHalf } from "react-icons/io";
+
 const ProductList = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
   const addToCart = () => {
     toast.success("Product added to cart")
   }
+
+  // fetch products
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products")
+      .then(res => res.json()
+        .then(data => setProducts(data)))
+      .catch(err => setError(err))
+      .finally(() => setLoading(false))
+  }, [])
+
   return (
     <main>
       <div className="flex-col gap-1 md:flex md:flex-row min-h-sreen">
@@ -133,53 +153,28 @@ const ProductList = () => {
           </div>
         </div>
         {/* Right */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 bg-slate-400 flex-3 p-3 my-2 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 flex-3 p-3 my-2 ">
 
           {/* card 1 */}
-          <div className="bg-slate-300 p-3 h-70 rounded shadow-md shadow-sky-200">
-            <Link to={"/products/1"}>
-              <img
-                className="w-full h-[60%] object-contain rounded cursor-pointer"
-                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" alt="" />
-            </Link>
-            {/* src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" alt="" /> */}
-            <h2 className="mt-2 font-semibold">Nike Product</h2>
-            <p className="mt-2 font-semibold">Price - $10</p>
-            <button onClick={addToCart} className="w-1/2 bg-green-900 text-white px-3 py-1 my-2 rounded-full text-sm cursor-pointer hover:bg-green-900 hover:text-slate-300 hover:scale-102 transition-all duration-300">Add to Cart</button>
+          {products.map((product) => (
 
-          </div>
-          <div className="bg-slate-300 p-3 h-70 rounded shadow-md shadow-sky-200">
-            <Link to={"/products/2"} >
-              <img
-                className="w-full h-[60%] object-contain rounded cursor-pointer"
-                src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" alt="" />
-            </Link>
-            <h2 className="mt-2 font-semibold">Nike Product</h2>
-            <p className="mt-2 font-semibold">Price - $10</p>
-            <button onClick={addToCart} className="w-1/2 bg-green-900 text-white px-3 py-1 my-2 rounded-full text-sm cursor-pointer hover:bg-green-900 hover:text-slate-300 hover:scale-102 transition-all duration-300">Add to Cart</button>
-          </div>
-          <div className="bg-slate-300 p-3 h-70 rounded shadow-md shadow-sky-200">
-            <Link to={"/products/3"}>
-              <img
-                className="w-full h-[60%] object-contain rounded cursor-pointer"
-                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" alt="" />
-            </Link>
-            <h2 className="mt-2 font-semibold">Nike Product</h2>
-            <p className="mt-2 font-semibold">Price - $10</p>
-            <button onClick={addToCart} className="w-1/2 bg-green-900 text-white px-3 py-1 my-2 rounded-full text-sm cursor-pointer hover:bg-green-900 hover:text-slate-300 hover:scale-102 transition-all duration-300">Add to Cart</button>
-          </div>
-          <div className="bg-slate-300 p-3 h-70 rounded shadow-md shadow-sky-200">
-            <Link to={"/products/4"}>
-              <img
-                className="w-full h-[60%] object-contain rounded cursor-pointer"
-                src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" alt="" />
-            </Link>
-            <h2 className="mt-2 font-semibold">Nike Product</h2>
-            <p className="mt-2 font-semibold">Price - $10</p>
-            <button onClick={addToCart} className="w-1/2 bg-green-900 text-white px-3 py-1 my-2 rounded-full text-sm cursor-pointer hover:bg-green-900 hover:text-slate-300 hover:scale-102 transition-all duration-300">Add to Cart</button>
-          </div>
+            <div className="bg-slate-300 p-3 h-70 rounded shadow-md shadow-sky-200">
+              <Link to={"/products/" + product.id} key={product.id}>
+                <img
+                  className="w-full h-[60%] object-contain rounded cursor-pointer hover:scale-105 transition-all duration-300"
+                  src={product.image} alt="" />
+              </Link>
+              <h2 className="mt-2 font-semibold">{product.title.slice(0, 20)}</h2>
+
+              <p className="mt-2 font-semibold">$ {product.price}</p>
+              <button onClick={addToCart} className="w-1/2 bg-green-900 text-white px-3 py-1 my-2 rounded-full text-sm cursor-pointer hover:bg-green-900 hover:text-slate-300 hover:scale-102 transition-all duration-300">Add to Cart</button>
+
+            </div>
+          ))}
+
 
         </div>
+
       </div>
 
 

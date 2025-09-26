@@ -9,10 +9,10 @@ const Navbar = () => {
     setOpen(!open)
   }
   return (
-    <nav className="flex justify-between items-center bg-slate-400 p-3 z-100">
+    <nav className="flex justify-between items-center bg-slate-900 p-3 z-100 text-white">
       <div className="flex items-center gap-0 text-2xl text-orange-900 font-semibold cursor-pointer">
-        <img src={logo} alt="logo" className="w-[80px] h-[50px]" />
-        Shoping</div>
+        <h2 className="text-2xl font-bold text-pink-500">Shop<span className='text-prink-600'>.</span></h2>
+      </div>
       <ul className="hidden  md:flex gap-4 cursor-pointer items-center ">
         <li className="relative group">
           <Link to={"/Tailwindshop"}>Home</Link>

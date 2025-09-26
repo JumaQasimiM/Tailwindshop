@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/Tailwindshop/', // für github pages Online
+  // base: '/Tailwindshop/', // für github pages Online
   plugins: [
     tailwindcss(),
     react()],
