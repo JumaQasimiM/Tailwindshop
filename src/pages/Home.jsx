@@ -35,7 +35,7 @@ const Home = () => {
         <h1 className="text-4xl font-bold text-center my-4">Popular Products</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {products.map(product => (
-            <div key={product.id} className="shadow-lg border-b p-2 rounded-sm shadow-mdtransform transition-transform hover:-translate-y-1 hover:shadow-2xl">
+            <div key={product.id} className="shadow-lg p-2 rounded-sm shadow-mdtransform transition-transform hover:-translate-y-1 hover:shadow-2xl">
               <img src={product.image} alt={product.title} className="w-[80%] h-38 object-contain mb-4 " />
               <h2 className="text-lg font-semibold">{product.title.slice(0, 20)}</h2>
               <p className="text-gray-600">${product.price}</p>

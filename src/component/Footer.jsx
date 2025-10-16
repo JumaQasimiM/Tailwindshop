@@ -39,9 +39,9 @@ const Footer = () => {
           </div>
 
           {/* Social Media */}
-          <div>
+          <div className='text-center'>
             <h3 className="text-lg font-semibold mb-2">Follow Us</h3>
-            <div className="flex space-x-4 mt-2">
+            <div className="flex space-x-4 mt-2 text-center">
               <Link className="text-gray-400 hover:text-white">
                 <FaFacebook className="text-white cursor-pointer hover:scale-120 transition-all duration-300" />
               </Link>
