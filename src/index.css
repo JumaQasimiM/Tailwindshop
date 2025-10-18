@@ -2,14 +2,15 @@
 /* @import "utilities"; */
 
 
+
 @layer utilities{
-  @keyframes scrollAnimation {
+  @keyframes  discount-show{
     0%{transform: 'translateX(0)' }
     100%{transform: 'translateX(-50%)'}
   }
 
-  .animate-scroll-x {
-   animation: scrollAnimation 10s ease-in-out infinite;
+  .animate-dicount-show {
+   animation: discount-show 10s ease-in-out infinite;
   }
 }
 
