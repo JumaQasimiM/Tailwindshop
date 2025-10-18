@@ -34,7 +34,7 @@ const offers = [
 
 const OfferSection = () => {
   return (
-    <section className="bg-gradient-to-br from-gray-50 to-white py-16 px-4 md:px-20">
+    <section className="bg-gradient-to-br from-gray-50 to-white py-10 px-4 md:px-20">
       <h2 className="text-4xl font-extrabold text-center text-gray-800 mb-12">
         🎁 Special <span className="text-pink-600">Offers</span> Just For You
       </h2>

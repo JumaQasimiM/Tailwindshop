@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import OfferSection from "../component/Offer";
 import { useEffect, useState } from "react";
 import hero from "../assets/hero.jpg"
+import MyCustomer from "../component/MyCustomer";
 const Home = () => {
   const [products, setProducts] = useState([])
 
@@ -46,6 +47,8 @@ const Home = () => {
           }
         </div>
       </div>
+      {/* mycustomer section */}
+      <MyCustomer />
       {/* offer */}
       <OfferSection />
     </div>
