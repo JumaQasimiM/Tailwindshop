@@ -19,23 +19,23 @@ const Navbar = () => {
       <ul className="hidden  md:flex gap-4 cursor-pointer items-center ">
         <li className="relative group">
           <Link to={"/Tailwindshop"}>Home</Link>
-          <span className="absolute -bottom-2 left-0 w-full opacity-0 h-[2px] bg-pink-700 group-hover:opacity-100 group-hover:bottom-0 transition-all duration-300"></span>
+          <span className="absolute -bottom-0.5 left-1/2 w-0 h-[2px] bg-pink-700 group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
         </li>
         <li className="relative group">
           <Link to={"/about"}>About</Link>
-          <span className="absolute -bottom-2 left-0 w-full opacity-0 h-[2px] bg-pink-700 group-hover:opacity-100 group-hover:bottom-0 transition-all duration-300"></span>
+          <span className="absolute -bottom-0.5 left-1/2 w-0 h-[2px] bg-pink-700 group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
         </li>
         <li className="relative group">
           <Link to={"/contact"}>Contact</Link>
-          <span className="absolute -bottom-2 left-0 w-full opacity-0 h-[2px] bg-pink-700 group-hover:opacity-100 group-hover:bottom-0 transition-all duration-300"></span>
+          <span className="absolute -bottom-0.5 left-1/2 w-0 h-[2px] bg-pink-700 group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
         </li>
         <li className="relative group">
           <Link to={"/products"}>Products</Link>
-          <span className="absolute -bottom-2 left-0 w-full opacity-0 h-[2px] bg-pink-700 group-hover:opacity-100 group-hover:bottom-0 transition-all duration-300"></span>
+          <span className="absolute -bottom-0.5 left-1/2 w-0 h-[2px] bg-pink-700 group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
         </li>
         <li className="relative group">
           <Link to={"/cart"}>Cart</Link>
-          <span className="absolute -bottom-2 left-0 w-full opacity-0 h-[2px] bg-pink-700 group-hover:opacity-100 group-hover:bottom-0 transition-all duration-300"></span>
+          <span className="absolute -bottom-0.5 left-1/2 w-0 h-[2px] bg-pink-700 group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
         </li>
         <button className="bg-green-900 text-white px-3 py-1 rounded-full text-sm cursor-pointer hover:bg-green-600 hover:text-slate-900 hover:scale-105 transition-all duration-300">
           {" "}
