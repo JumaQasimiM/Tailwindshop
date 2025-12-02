@@ -32,8 +32,11 @@ const Home = () => {
           {products.map((product) => (
             <div
               key={product.id}
-              className="flex flex-col items-center shadow-md p-2 pb-3 my-5 rounded-sm shadow-mdtransform transition-transform hover:-translate-y-1 hover:shadow-xl"
+              className="relative flex flex-col items-center shadow-md p-2 pb-3 my-5 rounded-sm shadow-mdtransform transition-transform hover:-translate-y-1 hover:shadow-xl"
             >
+              <p className="absolute top-1 left-0 bg-pink-500 px-4 py-1 text-white rounded-tr-[12px] rounded-br-[12px]">
+                new products
+              </p>
               <Link to={"/products/" + product.id} key={product.id}>
                 <img
                   src={product.image}
