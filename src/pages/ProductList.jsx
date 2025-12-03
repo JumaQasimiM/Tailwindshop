@@ -1,185 +1,193 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { toast } from 'react-toastify';
+
+import { toast } from "react-toastify";
 
 // react icons
 import { CiStar } from "react-icons/ci";
 import { IoMdStarHalf } from "react-icons/io";
+import { FaRegHeart, FaSearch } from "react-icons/fa";
+import { FaShop } from "react-icons/fa6";
+import { MdOutlineShoppingCart } from "react-icons/md";
+import { ProductCard } from "../component/ProductCard";
+
+// import image
+import Hero from "../assets/hero.jpg";
+import adv1 from "../assets/adv1.png";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const addToCart = () => {
-    toast.success("Product added to cart")
-  }
+    toast.success("Product added to cart");
+  };
 
   // fetch products
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
-      .then(res => res.json()
-        .then(data => setProducts(data)))
-      .catch(err => setError(err))
-      .finally(() => setLoading(false))
-  }, [])
+      .then((res) => res.json().then((data) => setProducts(data)))
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false));
+  }, []);
 
   return (
     <main>
-      <div className="flex-col gap-1 md:flex md:flex-row min-h-sreen">
-        <div className="bg-slate-200 flex-1 p-3 my-2">
+      {/* Categories + Search + Cart/Fav */}
+      <section className="flex flex-wrap items-center justify-between gap-5  my-4 px-4 md:px-6">
+        {/* Categories */}
+        <ul className="flex flex-wrap items-center gap-4 md:gap-8 font-semibold text-green-600 w-full md:w-auto">
+          <li className="cursor-pointer hover:text-sky-500 hover:-translate-y-1 transition">
+            Men
+          </li>
+          <li className="cursor-pointer hover:text-sky-500 hover:-translate-y-1 transition">
+            Women
+          </li>
+          <li className="cursor-pointer hover:text-sky-500 hover:-translate-y-1 transition">
+            T-Shirt
+          </li>
+          <li className="cursor-pointer hover:text-sky-500 hover:-translate-y-1 transition">
+            Shoes
+          </li>
+        </ul>
 
-          {/* search fieldset section */}
-          <fieldset className="fieldset border rounded border-slate-400 py-3">
-            <legend className="filedset-legend px-3 font-semibold">Search</legend>
-            <div className="">
-              <input type="text" className="appearance-none focus:outline-none border border-slate-400 px-2 py-1 rounded" placeholder="Product name" />
-              <button className="mx-2 border border-slate-400 px-2 py-1 rounded cursor-pointer">save</button>
-            </div>
-          </fieldset>
-          {/* color filters fieldset section */}
-          <fieldset className="fieldset border rounded border-slate-400 my-3">
-            <legend className="filedset-legend px-3 font-semibold">Color Filters</legend>
-            <div className="flex-col gap-4 md:flex md:flex-row p-3">
-              <label>
-                <input type="radio"
-                  name="color"
-                  className="w-4 h-4 ml-2 accent-blue-600"
-                />
-                <span> Blue</span>
-              </label>
-              <label>
-                <input type="radio"
-                  name="color"
-                  className="w-4 h-4 ml-2 accent-red-600"
-                />
-                <span> Red</span>
-              </label>
-              <label>
-                <input type="radio"
-                  name="color"
-                  className="w-4 h-4 ml-2 accent-green-600"
-                />
-                <span> Green</span>
-              </label>
-            </div>
-          </fieldset>
-          {/* Size filters fieldset section */}
-          <fieldset className="fieldset border rounded border-slate-400 my-3">
-            <legend className="filedset-legend px-3 font-semibold">Size Filters</legend>
-            <div className="flex-col gap-4 md:flex md:flex-row p-3">
-              <label>
-                <input type="radio"
-                  name="size"
-                  className="w-4 h-4 ml-2 accent-green-600" />
-                <span> S <small>(small)</small></span>
-              </label>
-              <label>
-                <input type="radio"
-                  name="size"
-                  className="w-4 h-4 ml-2 accent-green-600"
-
-                />
-                <span> M <small>(medium)</small></span>
-              </label>
-              <label>
-                <input type="radio"
-                  name="size"
-                  className="w-4 h-4 ml-2 accent-green-600" />
-                <span> L <small>(large)</small></span>
-              </label>
-            </div>
-          </fieldset>
-          {/* price filters fieldset section */}
-          <fieldset className="fieldset border rounded border-slate-400 my-3">
-            <legend className="filedset-legend px-3 font-semibold">Price Filters - $</legend>
-            <div className="flex-col gap-3 md:flex md:flex-row p-3">
-              <label>
-                <input type="radio"
-                  name="price"
-
-                  className="w-4 h-4 ml-2 accent-green-600" />
-                <span> 10 - 20</span>
-              </label>
-              <label>
-                <input type="radio"
-                  name="price"
-                  className="w-4 h-4 ml-2 accent-green-600"
-                />
-                <span> 20 - 30</span>
-              </label>
-              <label>
-                <input type="radio"
-                  name="price"
-                  className="w-4 h-4 ml-2 accent-green-600" />
-                <span> 30 - 40</span>
-              </label>
-            </div>
-          </fieldset>
-          {/* Products brand section */}
-          <fieldset className="fieldset border rounded border-slate-400 my-3">
-            <legend className="filedset-legend px-3 font-semibold">Brand Filters </legend>
-            <div className="flex-col gap-4 md:flex md:flex-row p-3">
-              <label>
-                <input type="radio"
-                  name="brand"
-                  className="w-4 h-4 ml-2 accent-green-600" />
-                <span> Nike</span>
-              </label>
-              <label>
-                <input type="radio"
-                  name="brand"
-                  className="w-4 h-4 ml-2 accent-green-600"
-                />
-                <span> Adidas</span>
-              </label>
-              <label>
-                <input type="radio"
-                  name="brand"
-                  className="w-4 h-4 ml-2 accent-green-600" />
-                <span> Puma</span>
-              </label>
-            </div>
-          </fieldset>
-          {/* Total found filter products */}
-          <div className="bg-slate-400 flex-3 p-3 my-2">
-            <h2 className="text-lg md:text-xl font-semibold">Total Found Products</h2>
-            <ul className="text-center mt-2">
-              <li>Nike Product - 30</li>
-              <li>Adidas Product - 90</li>
-              <li>Puma Product - 30</li>
-            </ul>
-            <h3 className="mt-2 font-semibold border-t border-slate-200">Total Products - 150</h3>
-          </div>
+        {/* Search Box */}
+        <div className="flex items-center w-full md:w-1/3 border border-sky-300 rounded-md overflow-hidden order-last md:order-none">
+          <input
+            type="text"
+            placeholder="Search products..."
+            className="w-full py-2 px-3 focus:outline-none text-slate-700"
+          />
+          <FaSearch size={20} className="mx-3 text-sky-500 cursor-pointer" />
         </div>
-        {/* Right */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 flex-3 p-3 my-2 ">
 
+        {/* Cart & Wishlist */}
+        <ul className="flex items-center gap-6 text-green-600 w-full md:w-auto justify-center md:justify-end">
+          {/* Cart */}
+          <li className="relative cursor-pointer hover:text-sky-500 hover:-translate-y-1 transition">
+            <MdOutlineShoppingCart size={22} />
+            <span className="absolute -top-1 -right-2 bg-red-400 text-black text-xs w-4 h-4 flex items-center justify-center rounded-full">
+              1
+            </span>
+          </li>
+
+          {/* Wishlist */}
+          <li className="relative cursor-pointer hover:text-sky-500 hover:-translate-y-1 transition">
+            <FaRegHeart size={22} />
+            <span className="absolute -top-1 -right-2 bg-red-400 text-black text-xs w-4 h-4 flex items-center justify-center rounded-full">
+              1
+            </span>
+          </li>
+        </ul>
+      </section>
+
+      <div className="flex-col gap-1 md:flex md:flex-row min-h-sreen">
+        {/* left - product */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 flex-3 p-3">
           {/* card 1 */}
           {products.map((product) => (
-
-            <div className="bg-slate-300 p-3 h-70 rounded shadow-md shadow-sky-200">
-              <Link to={"/products/" + product.id} key={product.id}>
-                <img
-                  className="w-full h-[60%] object-contain rounded cursor-pointer hover:scale-105 transition-all duration-300"
-                  src={product.image} alt="" />
-              </Link>
-              <h2 className="mt-2 font-semibold">{product.title.slice(0, 20)}</h2>
-
-              <p className="mt-2 font-semibold">$ {product.price}</p>
-              <button onClick={addToCart} className="w-1/2 bg-green-900 text-white px-3 py-1 my-2 rounded-full text-sm cursor-pointer hover:bg-green-900 hover:text-slate-300 hover:scale-102 transition-all duration-300">Add to Cart</button>
-
-            </div>
+            <ProductCard key={product.id} {...product} />
           ))}
-
-
         </div>
+        {/* Right - advertisment */}
+        <div className="flex-1 p-3">
+          {/* Advertisement1 */}
+          <div
+            className="relative flex flex-col justify-start px-6 w-[95%] md:w-[80%] md:mx-auto 
+             h-72 md:h-80 rounded text-white overflow-hidden 
+             bg-cover bg-center bg-no-repeat py-3 mb-10"
+          >
+            {/* Dark Overlay */}
+            <div className="absolute inset-0 bg-black/40"></div>
 
+            {/* Text Content */}
+            <div className="relative z-10 mt-10">
+              <h3 className="inline-block bg-fuchsia-800 font-semibold px-4 py-1 rounded">
+                Title Text Here
+              </h3>
+
+              <h1 className="text-4xl md:text-5xl font-bold mt-4 text-yellow-300 drop-shadow">
+                50% Sale
+              </h1>
+
+              <h5 className="text-lg md:text-xl mt-1 font-medium drop-shadow">
+                On Winter Women’s Collection
+              </h5>
+            </div>
+
+            {/* Product Image */}
+            <img
+              src={adv1}
+              alt="Advertisement"
+              className="absolute bottom-0 right-4 w-32 md:w-44 drop-shadow-lg"
+            />
+          </div>
+          {/* Advertisement2 */}
+          <div
+            className="relative flex flex-col justify-start px-6 w-full md:w-[80%] mx-auto 
+             h-72 md:h-80 rounded-lg text-white overflow-hidden shadow-lg
+             bg-cover bg-center bg-no-repeat py-3 mb-7"
+          >
+            {/* Dark Overlay */}
+            <div className="absolute inset-0 bg-green-500"></div>
+
+            {/* Text Content */}
+            <div className="relative z-10 mt-10">
+              <h3 className="inline-block bg-fuchsia-800 font-semibold px-4 py-1 rounded">
+                Title Text Here
+              </h3>
+
+              <h1 className="text-4xl md:text-5xl font-bold mt-4 text-yellow-300 drop-shadow">
+                50% Sale
+              </h1>
+
+              <h5 className="text-lg md:text-xl mt-1 font-medium drop-shadow">
+                On Winter Women’s Collection
+              </h5>
+            </div>
+
+            {/* Product Image */}
+            <img
+              src={adv1}
+              alt="Advertisement"
+              className="absolute bottom-0 right-4 w-32 md:w-44 drop-shadow-lg"
+            />
+          </div>
+          {/* Advertisement3 */}
+          <div
+            className="relative flex flex-col justify-start px-6 w-full md:w-[80%] mx-auto 
+             h-72 md:h-80 rounded-lg text-white overflow-hidden shadow-lg
+             bg-cover bg-center bg-no-repeat py-3 mb-7"
+          >
+            {/* Dark Overlay */}
+            <div className="absolute inset-0 bg-cyan-800"></div>
+
+            {/* Text Content */}
+            <div className="relative z-10 mt-10">
+              <h3 className="inline-block bg-orange-400 font-semibold px-4 py-1 rounded">
+                Title Text Here
+              </h3>
+
+              <h1 className="text-4xl md:text-5xl font-bold mt-4 text-white drop-shadow">
+                50% Sale
+              </h1>
+
+              <h5 className="text-lg md:text-xl mt-1 font-medium drop-shadow text-yellow-300">
+                On Winter Women’s Collection
+              </h5>
+            </div>
+
+            {/* Product Image */}
+            <img
+              src={adv1}
+              alt="Advertisement"
+              className="absolute bottom-0 right-4 w-32 md:w-44 drop-shadow-lg"
+            />
+          </div>
+        </div>
       </div>
-
-
     </main>
-  )
-}
+  );
+};
 
 export default ProductList;
