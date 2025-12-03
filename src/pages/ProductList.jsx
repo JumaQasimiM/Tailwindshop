@@ -13,6 +13,8 @@ import { ProductCard } from "../component/ProductCard";
 // import image
 import Hero from "../assets/hero.jpg";
 import adv1 from "../assets/adv1.png";
+import { WeekOffer } from "../component/weekOffer";
+import { Services } from "../component/services";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -25,7 +27,7 @@ const ProductList = () => {
 
   // fetch products
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
+    fetch("https://fakestoreapi.com/products?_limit=10")
       .then((res) => res.json().then((data) => setProducts(data)))
       .catch((err) => setError(err))
       .finally(() => setLoading(false));
@@ -80,12 +82,11 @@ const ProductList = () => {
           </li>
         </ul>
       </section>
-
       <div className="flex-col gap-1 md:flex md:flex-row min-h-sreen">
         {/* left - product */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 flex-3 p-3">
           {/* card 1 */}
-          {products.map((product) => (
+          {products.slice(0, 12).map((product) => (
             <ProductCard key={product.id} {...product} />
           ))}
         </div>
@@ -186,6 +187,10 @@ const ProductList = () => {
           </div>
         </div>
       </div>
+      {/* offer section */}
+      <WeekOffer />
+      {/* services */}
+      <Services />
     </main>
   );
 };

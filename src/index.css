@@ -1,19 +1,20 @@
 @import "tailwindcss";
 /* @import "utilities"; */
 
-
-
-@layer utilities{
-  @keyframes  discount-show{
-    0%{transform: 'translateX(0)' }
-    100%{transform: 'translateX(-50%)'}
+@layer utilities {
+  @keyframes discount-show {
+    0% {
+      transform: "translateX(0)";
+    }
+    100% {
+      transform: "translateX(-50%)";
+    }
   }
 
   .animate-dicount-show {
-   animation: discount-show 10s ease-in-out infinite;
+    animation: discount-show 10s ease-in-out infinite;
   }
 }
-
 
 .nav-li {
   @apply px-4 cursor-pointer mt-2 font-semibold text-orange-800 hover:text-orange-900 hover:border-l-4 hover:border-sky-900;
