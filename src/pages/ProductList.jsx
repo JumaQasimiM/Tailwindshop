@@ -54,6 +54,10 @@ const ProductList = () => {
       .finally(() => setLoading(false));
   }, []);
 
+  // add to card
+  const addTocard = (id) => {
+    toast.success("Product added to card." + id);
+  };
   return (
     <main className="w-full min-h-screen">
       {/* ======= HEADER (Categories + Search + Cart) ======= */}
@@ -108,7 +112,11 @@ const ProductList = () => {
             </p>
           ) : (
             products.map((product) => (
-              <ProductCard key={product.id} {...product} />
+              <ProductCard
+                key={product.id}
+                {...product}
+                addToCart={addTocard}
+              />
             ))
           )}
         </div>
