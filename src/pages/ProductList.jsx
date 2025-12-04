@@ -1,195 +1,154 @@
 import { useState, useEffect } from "react";
-
 import { toast } from "react-toastify";
 
-// react icons
-import { CiStar } from "react-icons/ci";
-import { IoMdStarHalf } from "react-icons/io";
+// Icons
 import { FaRegHeart, FaSearch } from "react-icons/fa";
-import { FaShop } from "react-icons/fa6";
 import { MdOutlineShoppingCart } from "react-icons/md";
-import { ProductCard } from "../component/ProductCard";
 
-// import image
-import Hero from "../assets/hero.jpg";
-import adv1 from "../assets/adv1.png";
+// Components
+import { ProductCard } from "../component/ProductCard";
 import { WeekOffer } from "../component/weekOffer";
 import { Services } from "../component/services";
+
+// Images
+import adv1 from "../assets/adv1.png";
+import adv2 from "../assets/adv2.png";
+import adv3 from "../assets/adv3.png";
+
+// Advertisement Data
+const advs = [
+  {
+    id: 1,
+    title: "Title Text Here",
+    discount: "50% Sale",
+    desc: " On Winter Women’s Collection",
+    image: adv1,
+  },
+  {
+    id: 2,
+    title: "Title Text Here",
+    discount: "70% Sale",
+    desc: " On Winter Women’s Collection",
+    image: adv2,
+  },
+  {
+    id: 3,
+    title: "Title Text Here",
+    discount: "30% Sale",
+    desc: " On Winter Women’s Collection",
+    image: adv3,
+  },
+];
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-  const addToCart = () => {
-    toast.success("Product added to cart");
-  };
-
-  // fetch products
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products?_limit=10")
-      .then((res) => res.json().then((data) => setProducts(data)))
-      .catch((err) => setError(err))
+    fetch("https://fakestoreapi.com/products?sort=asd")
+      .then((res) => res.json())
+      .then((data) => {
+        const from15 = data.slice(10, data.length);
+        setProducts(from15);
+      })
       .finally(() => setLoading(false));
   }, []);
 
   return (
-    <main>
-      {/* Categories + Search + Cart/Fav */}
-      <section className="flex flex-wrap items-center justify-between gap-5  my-4 px-4 md:px-6">
+    <main className="w-full min-h-screen">
+      {/* ======= HEADER (Categories + Search + Cart) ======= */}
+      <section className="flex flex-wrap items-center justify-between gap-5 py-4 px-4 md:px-6 bg-gray-50 ">
         {/* Categories */}
-        <ul className="flex flex-wrap items-center gap-4 md:gap-8 font-semibold text-green-600 w-full md:w-auto">
-          <li className="cursor-pointer hover:text-sky-500 hover:-translate-y-1 transition">
-            Men
-          </li>
-          <li className="cursor-pointer hover:text-sky-500 hover:-translate-y-1 transition">
-            Women
-          </li>
-          <li className="cursor-pointer hover:text-sky-500 hover:-translate-y-1 transition">
-            T-Shirt
-          </li>
-          <li className="cursor-pointer hover:text-sky-500 hover:-translate-y-1 transition">
-            Shoes
-          </li>
+        <ul className="flex flex-nowrap items-center gap-6 text-green-700 font-semibold">
+          {["Men", "Women", "T-Shirt", "Shoes"].map((c) => (
+            <li
+              key={c}
+              className="cursor-pointer hover:text-blue-500 hover:-translate-y-1 transition duration-300"
+            >
+              {c}
+            </li>
+          ))}
         </ul>
 
-        {/* Search Box */}
-        <div className="flex items-center w-full md:w-1/3 border border-sky-300 rounded-md overflow-hidden order-last md:order-none">
+        {/* Search */}
+        <div className="flex items-center w-full md:w-1/3 border border-blue-300 rounded-lg overflow-hidden">
           <input
             type="text"
             placeholder="Search products..."
-            className="w-full py-2 px-3 focus:outline-none text-slate-700"
+            className="w-full py-2 px-3 focus:outline-none text-gray-700"
           />
-          <FaSearch size={20} className="mx-3 text-sky-500 cursor-pointer" />
+          <FaSearch size={20} className="mx-3 text-blue-500 cursor-pointer" />
         </div>
 
         {/* Cart & Wishlist */}
-        <ul className="flex items-center gap-6 text-green-600 w-full md:w-auto justify-center md:justify-end">
-          {/* Cart */}
-          <li className="relative cursor-pointer hover:text-sky-500 hover:-translate-y-1 transition">
+        <ul className="hidden md:flex items-center gap-6 text-green-700">
+          <li className="relative cursor-pointer hover:text-blue-500 transition">
             <MdOutlineShoppingCart size={22} />
-            <span className="absolute -top-1 -right-2 bg-red-400 text-black text-xs w-4 h-4 flex items-center justify-center rounded-full">
+            <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
               1
             </span>
           </li>
 
-          {/* Wishlist */}
-          <li className="relative cursor-pointer hover:text-sky-500 hover:-translate-y-1 transition">
+          <li className="relative cursor-pointer hover:text-blue-500 transition">
             <FaRegHeart size={22} />
-            <span className="absolute -top-1 -right-2 bg-red-400 text-black text-xs w-4 h-4 flex items-center justify-center rounded-full">
+            <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
               1
             </span>
           </li>
         </ul>
       </section>
-      <div className="flex-col gap-1 md:flex md:flex-row min-h-sreen">
-        {/* left - product */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 flex-3 p-3">
-          {/* card 1 */}
-          {products.slice(0, 12).map((product) => (
-            <ProductCard key={product.id} {...product} />
+
+      {/* ======= MAIN CONTENT ======= */}
+      <div className="flex flex-col md:flex-row gap-4 mt-4 px-4">
+        {/* LEFT — PRODUCTS */}
+        <div className="flex-[3] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {loading ? (
+            <p className="text-center text-gray-500 col-span-full">
+              Loading products...
+            </p>
+          ) : (
+            products.map((product) => (
+              <ProductCard key={product.id} {...product} />
+            ))
+          )}
+        </div>
+
+        {/* RIGHT — ADVERTISEMENTS */}
+        <div className="flex-1 space-y-6">
+          {advs.map((adv) => (
+            <div
+              key={adv.id}
+              className="relative h-80 mb-11 rounded overflow-hidden flex items-start px-6 py-4 text-white bg-cover bg-center"
+              style={{ backgroundImage: `url(${adv.image})` }}
+            >
+              <div className="absolute inset-0 bg-black/40" />
+
+              <div className="relative z-10 mt-6">
+                <h4 className="inline-block bg-purple-700 px-3 py-1 rounded text-sm font-semibold">
+                  {adv.title}
+                </h4>
+
+                <h1 className="text-4xl font-bold mt-3 text-yellow-300 drop-shadow">
+                  {adv.discount}
+                </h1>
+
+                <p className="text-lg mt-1 font-medium drop-shadow">
+                  {adv.desc}
+                </p>
+              </div>
+
+              <img
+                src={adv.image}
+                alt="Advertisement"
+                className="absolute bottom-0 right-4 w-32 drop-shadow-lg"
+              />
+            </div>
           ))}
         </div>
-        {/* Right - advertisment */}
-        <div className="flex-1 p-3">
-          {/* Advertisement1 */}
-          <div
-            className="relative flex flex-col justify-start px-6 w-[95%] md:w-[80%] md:mx-auto 
-             h-72 md:h-80 rounded text-white overflow-hidden 
-             bg-cover bg-center bg-no-repeat py-3 mb-10"
-          >
-            {/* Dark Overlay */}
-            <div className="absolute inset-0 bg-black/40"></div>
-
-            {/* Text Content */}
-            <div className="relative z-10 mt-10">
-              <h3 className="inline-block bg-fuchsia-800 font-semibold px-4 py-1 rounded">
-                Title Text Here
-              </h3>
-
-              <h1 className="text-4xl md:text-5xl font-bold mt-4 text-yellow-300 drop-shadow">
-                50% Sale
-              </h1>
-
-              <h5 className="text-lg md:text-xl mt-1 font-medium drop-shadow">
-                On Winter Women’s Collection
-              </h5>
-            </div>
-
-            {/* Product Image */}
-            <img
-              src={adv1}
-              alt="Advertisement"
-              className="absolute bottom-0 right-4 w-32 md:w-44 drop-shadow-lg"
-            />
-          </div>
-          {/* Advertisement2 */}
-          <div
-            className="relative flex flex-col justify-start px-6 w-full md:w-[80%] mx-auto 
-             h-72 md:h-80 rounded-lg text-white overflow-hidden shadow-lg
-             bg-cover bg-center bg-no-repeat py-3 mb-7"
-          >
-            {/* Dark Overlay */}
-            <div className="absolute inset-0 bg-green-500"></div>
-
-            {/* Text Content */}
-            <div className="relative z-10 mt-10">
-              <h3 className="inline-block bg-fuchsia-800 font-semibold px-4 py-1 rounded">
-                Title Text Here
-              </h3>
-
-              <h1 className="text-4xl md:text-5xl font-bold mt-4 text-yellow-300 drop-shadow">
-                50% Sale
-              </h1>
-
-              <h5 className="text-lg md:text-xl mt-1 font-medium drop-shadow">
-                On Winter Women’s Collection
-              </h5>
-            </div>
-
-            {/* Product Image */}
-            <img
-              src={adv1}
-              alt="Advertisement"
-              className="absolute bottom-0 right-4 w-32 md:w-44 drop-shadow-lg"
-            />
-          </div>
-          {/* Advertisement3 */}
-          <div
-            className="relative flex flex-col justify-start px-6 w-full md:w-[80%] mx-auto 
-             h-72 md:h-80 rounded-lg text-white overflow-hidden shadow-lg
-             bg-cover bg-center bg-no-repeat py-3 mb-7"
-          >
-            {/* Dark Overlay */}
-            <div className="absolute inset-0 bg-cyan-800"></div>
-
-            {/* Text Content */}
-            <div className="relative z-10 mt-10">
-              <h3 className="inline-block bg-orange-400 font-semibold px-4 py-1 rounded">
-                Title Text Here
-              </h3>
-
-              <h1 className="text-4xl md:text-5xl font-bold mt-4 text-white drop-shadow">
-                50% Sale
-              </h1>
-
-              <h5 className="text-lg md:text-xl mt-1 font-medium drop-shadow text-yellow-300">
-                On Winter Women’s Collection
-              </h5>
-            </div>
-
-            {/* Product Image */}
-            <img
-              src={adv1}
-              alt="Advertisement"
-              className="absolute bottom-0 right-4 w-32 md:w-44 drop-shadow-lg"
-            />
-          </div>
-        </div>
       </div>
-      {/* offer section */}
+
+      {/* Sections */}
       <WeekOffer />
-      {/* services */}
       <Services />
     </main>
   );

@@ -40,8 +40,8 @@ const offers = [
 const OfferSection = () => {
   return (
     <section className="bg-gradient-to-br from-gray-50 to-white py-10 px-4 md:px-20">
-      <h2 className="text-4xl font-extrabold text-center text-gray-800 mb-12">
-        🎁 Special <span className="text-pink-600">Offers</span> Just For You
+      <h2 className="text-xl md:text-2xl font-extrabold text-center text-gray-800 mb-12">
+        🎁 Special <span className="text-sky-600">Offers</span> Just For You
       </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">

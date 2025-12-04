@@ -11,7 +11,7 @@ const MyCustomer = () => {
       {/* Marquee Content */}
       <div className="relative z-20">
         <Marquee speed={50} pauseOnHover gradient={false}>
-          <div className="flex gap-8 text-pink-600 text-xl font-bold tracking-wider">
+          <div className="flex gap-8 text-white/60 text-xl font-bold tracking-wider">
             <h1>{advertisment}</h1>
           </div>
         </Marquee>

@@ -2,13 +2,13 @@ import adv1 from "../assets/adv1.png";
 
 export const WeekOffer = () => {
   return (
-    <section className="relative w-full flex flex-col md:flex-row justify-center items-center bg-sky-800 p-4 md:p-8 gap-4 md:gap-8 my-4 overflow-hidden rounded-lg shadow-lg">
+    <section className="relative w-full flex flex-row justify-center items-center bg-sky-800 p-4 md:p-8 gap-4 md:gap-8 my-4 overflow-hidden">
       {/* Image */}
-      <div className="w-full md:w-1/3 flex justify-center relative">
+      <div className="flex-1 md:w-1/3 flex justify-center relative">
         <img
           src={adv1}
           alt="Week Offer"
-          className="w-2/3 h-auto md:h-80 object-contain rounded-lg shadow-lg transform transition-transform duration-700 hover:scale-105 animate-fadeIn"
+          className="h-auto md:h-80 object-contain transform transition-transform duration-700 hover:scale-105 animate-fadeIn"
         />
       </div>
       {/* Discount Tag */}
@@ -17,20 +17,20 @@ export const WeekOffer = () => {
       </p>
 
       {/* Content */}
-      <div className="w-full md:w-2/3 flex flex-col justify-start items-start text-white gap-3 md:gap-4 animate-slideInRight">
-        <h4 className="text-xs md:text-xl text-white/90 font-semibold bg-sky-600 px-4 md:px-5 py-1 rounded-tr-3xl rounded-bl-3xl transform transition-all duration-700 hover:scale-105">
+      <div className="flex-2 md:w-2/3 flex flex-col justify-start items-start text-white gap-3 md:gap-4 animate-slideInRight">
+        <h4 className="text-[10px] md:text-xl text-white/90 font-semibold bg-sky-600 px-4 md:px-5 py-1 rounded-tr-3xl rounded-bl-3xl transform transition-all duration-700 hover:scale-105">
           Weekly Special Offer
         </h4>
-        <h2 className="text-sm md:text-3xl font-bold text-white/90 animate-fadeIn delay-200">
+        <h2 className="text-[10px] md:text-3xl font-bold text-white/90 animate-fadeIn delay-200">
           Limited Time Deal – Don’t Miss Out!
         </h2>
-        <p className="hidden sm:block text-xs md:text-base text-white/90 animate-fadeIn delay-400">
+        <p className="text-[9px] sm:block md:text-base text-white/90 animate-fadeIn delay-400">
           Grab your favorite products with amazing discounts. Hurry up before
           the offer ends!
         </p>
 
         {/* Countdown Timer */}
-        <div className="flex flex-wrap gap-2 md:gap-3 mt-2">
+        <div className="flex flex-nowrap gap-1 md:gap-3 mt-2">
           {[
             { value: "10", label: "Days" },
             { value: "10", label: "Hours" },

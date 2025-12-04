@@ -5,62 +5,107 @@ import { useEffect, useState } from "react";
 import MyCustomer from "../component/MyCustomer";
 import Category from "../component/category";
 import Slider from "../component/slider";
+
 const Home = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products?limit=5&sort=desc&rating=desc")
-      .then((res) => res.json().then((data) => setProducts(data)))
+    fetch("https://fakestoreapi.com/products")
+      .then((res) => res.json())
+      .then((data) => {
+        const sorted = data
+          .sort((a, b) => b.rating.rate - a.rating.rate) // sort by rating desc
+          .slice(0, 5); // only 5 popular products
+
+        setProducts(sorted);
+      })
       .catch((err) => console.log(err));
   }, []);
 
   const addToCart = () => {
     toast.success("Product added to cart");
   };
+
   return (
     <div>
-      {/* slider */}
+      {/* Slider */}
       <Slider />
-      {/* category */}
+
+      {/* Category */}
       <Category />
-      {/* popular products */}
+
+      {/* Popular products */}
       <div>
-        <h2 className="text-4xl font-extrabold text-center text-gray-800 mb-12">
-          Popular <span className="text-pink-600">Products</span>
+        <h2 className="text-2xl font-extrabold text-center text-gray-800 mb-12">
+          Popular <span className="text-sky-600">Products</span>
         </h2>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {products.map((product) => (
             <div
               key={product.id}
-              className="relative flex flex-col items-center shadow-md p-2 pb-3 my-5 rounded-sm shadow-mdtransform transition-transform hover:-translate-y-1 hover:shadow-xl"
+              className="group relative bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden 
+             hover:shadow-xl transition-all duration-300 hover:-translate-y-1 mx-3"
             >
-              <p className="absolute top-1 left-0 bg-pink-500 px-4 py-1 text-white rounded-tr-[12px] rounded-br-[12px]">
-                new products
-              </p>
-              <Link to={"/products/" + product.id} key={product.id}>
-                <img
-                  src={product.image}
-                  alt={product.title}
-                  className="w-[80%] h-38 object-contain mb-4 "
-                />
-              </Link>
-              <h2 className="text-lg font-semibold text-gray-800">
-                {product.title.slice(0, 20)}
-              </h2>
-              <p className="text-gray-600">${product.price}</p>
-              <button
-                className="bg-pink-700 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded mt-4"
-                onClick={addToCart}
+              {/* Badge */}
+              <span
+                className="z-100 absolute top-2 left-2 bg-sky-600 text-white text-xs font-semibold 
+                  px-3 py-1 rounded-md shadow-md"
               >
-                Add to Cart
-              </button>
+                ⭐ Popular
+              </span>
+
+              {/* Product Image */}
+              <Link to={`/products/${product.id}`}>
+                <div className="w-full h-40 flex items-center justify-center p-4">
+                  <img
+                    src={product.image}
+                    alt={product.title}
+                    className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+              </Link>
+
+              {/* Content */}
+              <div className="px-4 pb-4 text-center">
+                {/* Title */}
+                <h2 className="text-md font-semibold text-gray-800 h-12 overflow-hidden">
+                  {product.title.slice(0, 30)}...
+                </h2>
+
+                {/* Price */}
+                <p className="text-xl font-bold text-sky-600 mt-1">
+                  ${product.price}
+                </p>
+
+                {/* Rating */}
+                <div className="flex justify-center items-center mt-1 text-yellow-400 text-sm">
+                  {"★".repeat(Math.round(product.rating.rate))}
+                  {"☆".repeat(5 - Math.round(product.rating.rate))}
+                  <span className="text-gray-500 text-xs ml-2">
+                    ({product.rating.count})
+                  </span>
+                </div>
+
+                {/* Add to Cart Button */}
+                <button
+                  className="mt-4 w-full py-2 bg-sky-600 text-white text-sm font-semibold rounded-md 
+                 shadow-md transition-all duration-300 
+                 group-hover:bg-pink-700 group-hover:shadow-lg"
+                  onClick={addToCart}
+                >
+                  Add to Cart
+                </button>
+              </div>
             </div>
           ))}
         </div>
       </div>
-      {/* mycustomer section */}
+
+      {/* Customer section */}
       <MyCustomer />
-      {/* offer */}
+
+      {/* Offer */}
       <OfferSection />
     </div>
   );
