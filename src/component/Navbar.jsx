@@ -21,16 +21,17 @@ const Navbar = () => {
           <Link to={"/Tailwindshop"}>Home</Link>
           <span className="absolute -bottom-0.5 left-1/2 w-0 h-[2px] bg-pink-700 group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
         </li>
+
+        <li className="relative group">
+          <Link to={"/products"}>shop</Link>
+          <span className="absolute -bottom-0.5 left-1/2 w-0 h-[2px] bg-pink-700 group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
+        </li>
         <li className="relative group">
           <Link to={"/about"}>About</Link>
           <span className="absolute -bottom-0.5 left-1/2 w-0 h-[2px] bg-pink-700 group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
         </li>
         <li className="relative group">
           <Link to={"/contact"}>Contact</Link>
-          <span className="absolute -bottom-0.5 left-1/2 w-0 h-[2px] bg-pink-700 group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
-        </li>
-        <li className="relative group">
-          <Link to={"/products"}>Products</Link>
           <span className="absolute -bottom-0.5 left-1/2 w-0 h-[2px] bg-pink-700 group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
         </li>
         <li className="relative group">
@@ -85,14 +86,15 @@ const Navbar = () => {
         <li className="nav-li" onClick={handleOpen}>
           <Link to={"/Tailwindshop"}>Home</Link>
         </li>
+
+        <li className="nav-li" onClick={handleOpen}>
+          <Link to={"/products"}>shop</Link>
+        </li>
         <li className="nav-li" onClick={handleOpen}>
           <Link to={"/about"}>About</Link>
         </li>
         <li className="nav-li" onClick={handleOpen}>
           <Link to={"/contact"}>Contact</Link>
-        </li>
-        <li className="nav-li" onClick={handleOpen}>
-          <Link to={"/products"}>Products</Link>
         </li>
         <button className="nav-btn" onClick={handleOpen}>
           {" "}

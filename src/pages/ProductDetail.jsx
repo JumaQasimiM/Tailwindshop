@@ -169,11 +169,11 @@ export default function ProductDetail() {
                 {"★".repeat(Math.round(item.rating?.rate || 0))}
                 {"☆".repeat(5 - Math.round(item.rating?.rate || 0))}
               </p>
-              <p className="font-bold">${item.price}</p>
+              <p className="font-bold mb-2">${item.price}</p>
 
               <Link
                 to={`/products/${item.id}`}
-                className="bg-blue-600 text-white px-2 py-1 rounded mt-1"
+                className="bg-blue-600 text-white px-2 py-1 rounded mt-2"
               >
                 view product
               </Link>
